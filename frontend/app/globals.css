@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Cinematic Rail DNA — Distribution & Demand
+     Cold slate w/ cyan undertone, Luminance < 10% */
+  --rr-bg: #07081C;
+  --rr-surface: #0E1030;
+  --rr-card: #14163C;
+  --rr-border: #2A2D5A;
+  --rr-cyan: #22D3EE;
+  --rr-indigo: #E879F9;
+  --rr-text: #E2E8F0;
+  --rr-muted: #64748B;
+  --rr-amber: #F59E0B;
+  --rr-green: #34D399;
+  --rr-red: #F87171;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+body {
+  background: var(--rr-bg);
+  color: var(--rr-text);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar { width: 3px; height: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--rr-border); border-radius: 2px; }
+
+/* Glassmorphism */
+.glass {
+  background: rgba(20,22,60, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 0.5px solid var(--rr-border);
+}
+
+/* Cyan glow active state */
+.cyan-glow { box-shadow: 0 0 0 1px rgba(34,211,238,0.2), 0 0 16px rgba(34,211,238,0.08); }
+
+/* Range sliders */
+input[type="range"] {
+  -webkit-appearance: none; appearance: none;
+  height: 3px; background: var(--rr-border);
+  border-radius: 2px; outline: none; cursor: pointer; width: 100%;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--rr-cyan); cursor: pointer;
+  box-shadow: 0 0 8px rgba(34,211,238,0.6);
+  transition: transform 0.15s;
+}
+input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+
+/* Animations */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+@keyframes countUp { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* Slide-over panel animations */
+@keyframes slideInFromRight {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+@keyframes slideOutToRight {
+  from { transform: translateX(0); }
+  to   { transform: translateX(100%); }
+}
+@keyframes backdropFadeIn  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes backdropFadeOut { from { opacity: 1; } to { opacity: 0; } }
+
+.animate-fadeInUp { animation: fadeInUp 0.35s ease both; }
+.animate-fadeIn   { animation: fadeIn 0.25s ease both; }
+.animate-pulse-dot { animation: pulse 1.5s infinite; }
+
+/* Skeleton loader */
+.skeleton {
+  background: linear-gradient(90deg, #2A2D5A 25%, #3A3D6E 50%, #2A2D5A 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 4px;
+}
+
+/* Tooltip */
+.rr-tooltip {
+  position: absolute; z-index: 50;
+  background: var(--rr-card); border: 0.5px solid var(--rr-border);
+  border-radius: 6px; padding: 8px 12px;
+  font-size: 11px; color: var(--rr-text);
+  pointer-events: none; white-space: nowrap;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  animation: fadeIn 0.15s ease;
+}
+
+/* Card hover */
+.rr-card-hover {
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.rr-card-hover:hover {
+  border-color: rgba(34,211,238,0.3) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(34,211,238,0.06);
+}
+
+/* Tab indicator + numbers */
+.tab-indicator { transition: all 0.2s ease; }
+.num-transition { transition: all 0.4s ease; animation: countUp 0.4s ease; }
+
+@keyframes scoreFlash {
+  0%   { color: #ffffff; text-shadow: 0 0 8px rgba(34,211,238,0.9); }
+  100% { color: #22D3EE; text-shadow: none; }
+}
+
+.rr-tab:hover {
+  border-color: var(--tab-accent) !important;
+  color: var(--tab-accent) !important;
+  background: color-mix(in srgb, var(--tab-accent) 8%, transparent) !important;
+}
+.rr-tab:hover span {
+  filter: none !important;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }

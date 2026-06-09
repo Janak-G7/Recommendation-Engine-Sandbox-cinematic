@@ -1,0 +1,27 @@
+services:
+  # ── FastAPI backend ──────────────────────────────────────────
+  - type: web
+    name: poc49-backend
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      # Allow the frontend service to call this API.
+      # *.onrender.com is already allowed via regex in main.py, so this is optional.
+      - key: ALLOWED_ORIGINS
+        sync: false   # e.g. https://poc49-frontend.onrender.com
+
+  # ── Next.js frontend ─────────────────────────────────────────
+  - type: web
+    name: poc49-frontend
+    runtime: node
+    rootDir: frontend
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm run start -- -p $PORT
+    envVars:
+      # Point the UI at the backend service URL after the backend deploys.
+      - key: NEXT_PUBLIC_API_URL
+        sync: false   # e.g. https://poc49-backend.onrender.com

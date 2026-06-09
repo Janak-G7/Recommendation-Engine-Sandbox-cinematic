@@ -1,0 +1,25 @@
+# deps
+node_modules/
+.pnp
+.pnp.js
+
+# python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# next
+.next/
+out/
+build/
+
+# env
+.env
+.env*.local
+
+# misc
+.DS_Store
+*.log
+repomix-output.xml

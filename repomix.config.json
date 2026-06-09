@@ -1,0 +1,27 @@
+{
+  "output": {
+    "filePath": "repomix-output.xml",
+    "style": "xml",
+    "removeComments": false,
+    "removeEmptyLines": false,
+    "showLineNumbers": false
+  },
+  "include": [
+    "backend/**/*.py",
+    "backend/.env.example",
+    "backend/requirements.txt",
+    "frontend/app/**/*.tsx",
+    "frontend/app/**/*.ts",
+    "frontend/app/**/*.css",
+    "frontend/components/**/*.tsx",
+    "frontend/lib/**/*.ts",
+    "frontend/*.json",
+    "frontend/*.js",
+    "frontend/*.ts",
+    "README.md"
+  ],
+  "ignore": {
+    "useGitignore": true,
+    "useDefaultPatterns": true
+  }
+}
