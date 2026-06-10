@@ -1,0 +1,21 @@
+services:
+  backend:
+    build: ./backend
+    container_name: poc49-backend
+    ports:
+      - "8000:8000"
+    environment:
+      # Allow the browser app (served from localhost:3000) to call the API
+      - ALLOWED_ORIGINS=http://localhost:3000
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        # The browser calls the backend on the host, not the container hostname
+        NEXT_PUBLIC_API_URL: http://localhost:8000
+    container_name: poc49-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend

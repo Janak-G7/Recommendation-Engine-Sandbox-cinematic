@@ -169,7 +169,7 @@ export default function Home() {
             <span style={{ width: 22, height: 1, background: "linear-gradient(90deg, #E879F9, transparent)" }} />
           </div>
 
-          <h1 style={{
+          <h1 data-testid="hero-title" style={{
             margin: 0, fontSize: "clamp(26px, 4vw, 40px)", fontWeight: 800,
             letterSpacing: "-0.03em", lineHeight: 1.05,
             background: "linear-gradient(100deg, #FFFFFF 0%, #BFE9F5 38%, #22D3EE 62%, #E879F9 100%)",
@@ -387,7 +387,7 @@ export default function Home() {
         }} />
       )}
 
-      <div style={{
+      <div data-testid="intel-panel" data-open={panelOpen} style={{
         position: "fixed", top: 0, right: 0, bottom: 0,
         width: "min(420px, 90vw)", zIndex: 50,
         background: "#0E1030",
@@ -467,7 +467,7 @@ export default function Home() {
                 { label: "Batch",     value: ARCHITECT.batch, color: "#E879F9" },
                 { label: "Stack",     value: ARCHITECT.stack, color: "#34D399" },
               ].map(row => (
-                <div key={row.label} style={{
+                <div key={row.label} data-testid={`meta-${row.label.toLowerCase()}`} style={{
                   padding: "10px 12px",
                   background: "rgba(7,8,28,0.5)",
                   border: "0.5px solid #2A2D5A",
