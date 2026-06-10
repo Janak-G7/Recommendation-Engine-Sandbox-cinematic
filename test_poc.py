@@ -25,14 +25,13 @@ import os
 import sys
 import datetime
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 # ── Config ───────────────────────────────────────────────────────────────────
 LIVE_URL = (sys.argv[1] if len(sys.argv) > 1
-            else "https://poc49-frontend.onrender.com")  # <-- replace with your URL
+            else "https://poc49-frontend.onrender.com")
 ARCHITECT_NAME = "janak.g"
 WAIT = 60  # seconds; generous for cold-start free tier
 
@@ -45,8 +44,25 @@ def record(name, passed, detail=""):
 
 
 def make_driver():
-    opts = Options()
-    if os.getenv("HEADLESS") == "1":
+    """Use whatever browser is installed — tries Edge (built into Windows) first,
+    then Chrome. Selenium 4 auto-downloads the matching driver."""
+    headless = os.getenv("HEADLESS") == "1"
+    # Try Edge
+    try:
+        from selenium.webdriver.edge.options import Options as EdgeOptions
+        opts = EdgeOptions()
+        if headless:
+            opts.add_argument("--headless=new")
+        opts.add_argument("--window-size=1440,900")
+        opts.add_argument("--no-sandbox")
+        opts.add_argument("--disable-dev-shm-usage")
+        return webdriver.Edge(options=opts)
+    except Exception as edge_err:
+        print(f"[info] Edge unavailable ({edge_err}); trying Chrome...")
+    # Fall back to Chrome
+    from selenium.webdriver.chrome.options import Options as ChromeOptions
+    opts = ChromeOptions()
+    if headless:
         opts.add_argument("--headless=new")
     opts.add_argument("--window-size=1440,900")
     opts.add_argument("--no-sandbox")

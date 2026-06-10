@@ -1,0 +1,48 @@
+============================================================
+  REAL RAILS PoC #49 — SELENIUM UAT REPORT
+  Recommendation Engine Sandbox (Cinematic)
+============================================================
+Target URL : https://poc49-frontend.onrender.com
+Run at     : 2026-06-10T06:12:49
+Architect  : janak.g
+------------------------------------------------------------
+[PASS] Test 1 - Page Load
+        hero title: "Recommendation Engine Sandbox"
+[PASS] Test 2 - Visualization
+        bg=rgb(7, 8, 28), viz tag=<canvas>
+[PASS] Test 3 - Handshake (Panel slide-over)
+        Intelligence Panel slid into view
+[FAIL] Test 4 - Signature
+        ElementClickInterceptedException: Message: element click intercepted: Element <button ar...a-label="Architect info" style="width:26px;height:26px;border-radius:50%;background:rgba(20,22,60,0.7);color:#94A3B8;border:0.5px solid #2A2D5A;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;font-style:italic;font-weight:700;font-family:Georgia, serif;transition:all 0.2s">i</button> is not clickable at point (1389, 26). Other element would receive the click: <button aria-label="Close panel" style="position:absolute;top:12px;right:12px;z-index:60;width:28px;height:28px;border-radius:50%;background:rgba(7,8,28,0.9);color:#94A3B8;border:0.5px solid #2A2D5A;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;line-height:1;transition:all 0.15s">...</button>
+  (Session info: chrome=149.0.7827.55); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementclickinterceptedexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff6889f3435+14875]
+	chromedriver!GetHandleVerifier [0x7ff6889f3490+148d0]
+	chromedriver!(No symbol) [0x7ff68854778d]
+	chromedriver!(No symbol) [0x7ff6885a9605]
+	chromedriver!(No symbol) [0x7ff6885a721a]
+	chromedriver!(No symbol) [0x7ff6885a4567]
+	chromedriver!(No symbol) [0x7ff6885a3410]
+	chromedriver!(No symbol) [0x7ff688595e28]
+	chromedriver!(No symbol) [0x7ff6885ca27a]
+	chromedriver!(No symbol) [0x7ff6885956a6]
+	chromedriver!(No symbol) [0x7ff6885ee9fc]
+	chromedriver!(No symbol) [0x7ff688593eb0]
+	chromedriver!(No symbol) [0x7ff688594e23]
+	chromedriver!GetHandleVerifier [0x7ff688fd6c91+5f80d1]
+	chromedriver!GetHandleVerifier [0x7ff688fd101b+5f245b]
+	chromedriver!GetHandleVerifier [0x7ff688ff6305+617745]
+	chromedriver!GetHandleVerifier [0x7ff688a103ee+3182e]
+	chromedriver!GetHandleVerifier [0x7ff688a18b0c+39f4c]
+	chromedriver!GetHandleVerifier [0x7ff6889fcb04+1df44]
+	chromedriver!GetHandleVerifier [0x7ff6889fcc94+1e0d4]
+	chromedriver!GetHandleVerifier [0x7ff6889e0997+1dd7]
+	KERNEL32!BaseThreadInitThunk [0x7ffeb1cee957+17]
+	ntdll!RtlUserThreadStart [0x7ffeb3327c1c+2c]
+
+[FAIL] Test 5 - Data Load
+        stat strip + metrics rendered
+------------------------------------------------------------
+RESULT: 3/5 passed (60%)
+OVERALL: FAIL ❌
+============================================================

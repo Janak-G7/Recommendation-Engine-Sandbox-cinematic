@@ -98,6 +98,15 @@ export default function OutcomesPanel({ outcomes }: Props) {
   };
 
   const sorted = catData; // already sorted by normalized exposure
+  if (sorted.length === 0) {
+    return (
+      <div style={{ background:"#0C1824", border:"0.5px solid #2A2D5A", borderRadius:8, padding:"32px 16px", textAlign:"center" }}>
+        <div style={{ fontSize:24, marginBottom:8 }}>📊</div>
+        <div style={{ fontSize:12, fontWeight:600, color:"#E2E8F0", marginBottom:4 }}>No category data for this view</div>
+        <div style={{ fontSize:11, color:"#64748B" }}>Try a different filter or reset to All.</div>
+      </div>
+    );
+  }
   const top = sorted[0];
   const bottom = sorted[sorted.length-1];
   const topQ = ((outcomes.category_quality[top[0]] || 0) * 100).toFixed(0);

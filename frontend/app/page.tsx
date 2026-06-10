@@ -45,12 +45,7 @@ export default function Home() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      const tag = (e.target as HTMLElement)?.tagName;
-      const typing = tag === "INPUT" || tag === "TEXTAREA";
       if (e.key === "Escape") { setPanelOpen(false); setInfoOpen(false); }
-      if (!typing && (e.key === "i" || e.key === "I")) {
-        setPanelOpen(p => !p); setHintShown(false);
-      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -274,7 +269,13 @@ export default function Home() {
             />
           )}
           {rr.tab === "score" && (
-            <ScoreView items={rr.isLive ? rr.recommendations : rr.allItems} />
+            (rr.isLive ? rr.recommendations : rr.allItems).length > 0
+              ? <ScoreView items={rr.isLive ? rr.recommendations : rr.allItems} />
+              : <div style={{ background:"#0C1824", border:"0.5px solid #2A2D5A", borderRadius:8, padding:"32px 16px", textAlign:"center" }}>
+                  <div style={{ fontSize:24, marginBottom:8 }}>🔍</div>
+                  <div style={{ fontSize:12, fontWeight:600, color:"#E2E8F0", marginBottom:4 }}>No items to score</div>
+                  <div style={{ fontSize:11, color:"#64748B" }}>Adjust the filter or reset to All.</div>
+                </div>
           )}
           {rr.tab === "bias" && (
             <BiasLoop
@@ -353,28 +354,6 @@ export default function Home() {
             color: "#22D3EE", fontSize: 9, fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase",
           }}>Intel</span>
         </button>
-      )}
-
-      {/* First-time hint */}
-      {hintShown && !panelOpen && (
-        <div style={{
-          position: "fixed", bottom: 24, right: 50, zIndex: 24,
-          background: "rgba(20,22,60,0.95)",
-          border: "0.5px solid rgba(34,211,238,0.3)",
-          borderRadius: 6, padding: "8px 12px",
-          fontSize: 10, color: "#94A3B8",
-          boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
-          animation: "fadeIn 0.4s ease both",
-          pointerEvents: "none",
-          display: "flex", alignItems: "center", gap: 8,
-        }}>
-          <span>Click any data point or press</span>
-          <kbd style={{
-            background: "#07081C", border: "0.5px solid #2A2D5A", borderRadius: 3,
-            padding: "1px 6px", fontSize: 10, color: "#22D3EE", fontFamily: "monospace",
-          }}>i</kbd>
-          <span>for intel</span>
-        </div>
       )}
 
       {/* ── Slide-over Panel ───────────────────────────────────── */}
